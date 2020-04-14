@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body bgcolor='#000000'>
+
+</body>
+</html>
+<script type="text/javascript">
+	//每隔一段时间就 创建一个图片 追加到页面中
+	//星星大小随机  位置随机
+	//点击星星消失
+
+	var timer = setInterval(createImg, 100);
+	function createImg()
+	{
+		//创建一张图片
+		var oImg = document.createElement('img');
+		document.body.appendChild(oImg);
+		oImg.src = 'img/star.gif';
+		//设置图片随机宽高
+		var w = rand(5, 20);
+		oImg.width = w;
+		oImg.height = w;
+
+		//位置随机  css position  lest top
+		oImg.style.position = 'absolute';
+		//获取窗口的宽高
+		//宽： window.innerWidth
+		//高： window.innerHeight
+		//【注意】： left和top是有单位的 px
+		oImg.style.top = rand(0, window.innerHeight-w) + 'px';
+		oImg.style.left = rand(0, window.innerWidth-w) + 'px';
+		oImg.onclick = function () {
+			this.remove();
+		}
+
+	}
+
+	function rand(m, n)
+	{
+		return Math.round(Math.random()* (n-m)) +m;
+	}
+</script>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>动态图片切换</title>
+        <meta charset="UTF-8">
+        <style type="text/css">
+            *{margin:0; padding:0}
+            #container{padding:10px;width:200px;margin:auto;height:200px;border:orange solid 1px; border-radius:8px;}
+            #dice{width:200px;height:200px;}
+            #command{margin:auto;width:100px;}
+            #command input{width:100px;height:30px;border:#ccc solid 1px;border-radius:8px;}
+        </style>
+    </head>
+    <body>
+        <!-- 游戏区域 -->
+        <div id="container">
+            <img src="img/dice_1.png" id="dice" alt="">
+        </div>
+        <div id="command">
+            <input type="button" onclick="shake()" value="摇一摇">
+        </div>
+    </body>
+</html>
+<script>
+   /*
+		思路：点击按钮，生成随机时间
+		在随机时间内，切换图片
+   */
+
+   //解决重负定时器的问题：标志位 flag
+
+    var oDice = document.getElementById('dice');
+    var flag = true;
+   	function shake()
+   	{
+   		if (flag) {
+   			flag = false;
+   		
+	   		//骰子摇起来
+	   		oDice.src = 'img/diceDynamic.gif';
+	   		var randTime = rand(2000, 5000);
+	   		setTimeout(function () {
+	   			var index = rand(1, 6);
+	   			oDice.src = 'img/dice_'+index+'.png';
+	   			flag = true;
+	   		}, randTime);
+   		}
+
+   	}
+
+   	function rand(m, n)
+	{
+		return Math.round(Math.random()* (n-m)) +m;
+	}
+
+</script>
